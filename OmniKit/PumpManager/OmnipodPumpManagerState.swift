@@ -10,6 +10,7 @@ import RileyLinkKit
 import RileyLinkBLEKit
 import LoopKit
 
+public let defaultLowReservoirLevel: Double = 20 // default low reservior alert level
 
 public struct OmnipodPumpManagerState: RawRepresentable, Equatable {
     public typealias RawValue = PumpManager.RawStateValue
@@ -30,7 +31,11 @@ public struct OmnipodPumpManagerState: RawRepresentable, Equatable {
 
     public var expirationReminderDate: Date?
 
-    public var bolusBeeps: Bool
+    public var lowReservoirLevel: Double
+
+    public var confirmationBeeps: Bool
+
+    public var optionalPodAlarms: Bool
 
     // Temporal state not persisted
 
@@ -56,7 +61,9 @@ public struct OmnipodPumpManagerState: RawRepresentable, Equatable {
         self.basalSchedule = basalSchedule
         self.rileyLinkConnectionManagerState = rileyLinkConnectionManagerState
         self.unstoredDoses = []
-        self.bolusBeeps = false
+        self.lowReservoirLevel = defaultLowReservoirLevel
+        self.confirmationBeeps = false
+        self.optionalPodAlarms = false
     }
     
     public init?(rawValue: RawValue) {
@@ -119,6 +126,8 @@ public struct OmnipodPumpManagerState: RawRepresentable, Equatable {
             self.messageLog = messageLog
         }
 
+        self.lowReservoirLevel = rawValue["lowReservoirLevel"] as? Double ?? defaultLowReservoirLevel
+
         if let expirationReminderDate = rawValue["expirationReminderDate"] as? Date {
             self.expirationReminderDate = expirationReminderDate
         } else if let expiresAt = podState?.expiresAt {
@@ -131,7 +140,9 @@ public struct OmnipodPumpManagerState: RawRepresentable, Equatable {
             self.unstoredDoses = []
         }
 
-        self.bolusBeeps = rawValue["bolusBeeps"] as? Bool ?? false
+        self.confirmationBeeps = rawValue["confirmationBeeps"] as? Bool ?? rawValue["bolusBeeps"] as? Bool ?? false
+
+        self.optionalPodAlarms = rawValue["optionalPodAlarms"] as? Bool ?? false
     }
     
     public var rawValue: RawValue {
@@ -141,7 +152,9 @@ public struct OmnipodPumpManagerState: RawRepresentable, Equatable {
             "basalSchedule": basalSchedule.rawValue,
             "messageLog": messageLog.rawValue,
             "unstoredDoses": unstoredDoses.map { $0.rawValue },
-            "bolusBeeps": bolusBeeps,
+            "lowReservoirLevel": lowReservoirLevel,
+            "confirmationBeeps": confirmationBeeps,
+            "optionalPodAlarms": optionalPodAlarms,
         ]
         
         if let podState = podState {
@@ -165,7 +178,7 @@ extension OmnipodPumpManagerState {
         return podState?.isActive == true
     }
 
-    var hasSetupCompletePod: Bool {
+    var hasSetupPod: Bool {
         return podState?.isSetupComplete == true
     }
 
@@ -183,6 +196,7 @@ extension OmnipodPumpManagerState: CustomDebugStringConvertible {
             "## OmnipodPumpManagerState",
             "* timeZone: \(timeZone)",
             "* basalSchedule: \(String(describing: basalSchedule))",
+            "* lowReservoirLevel: \(String(describing: lowReservoirLevel))",
             "* expirationReminderDate: \(String(describing: expirationReminderDate))",
             "* unstoredDoses: \(String(describing: unstoredDoses))",
             "* suspendEngageState: \(String(describing: suspendEngageState))",
@@ -190,7 +204,8 @@ extension OmnipodPumpManagerState: CustomDebugStringConvertible {
             "* tempBasalEngageState: \(String(describing: tempBasalEngageState))",
             "* lastPumpDataReportDate: \(String(describing: lastPumpDataReportDate))",
             "* isPumpDataStale: \(String(describing: isPumpDataStale))",
-            "* bolusBeeps: \(String(describing: bolusBeeps))",
+            "* confirmationBeeps: \(String(describing: confirmationBeeps))",
+            "* optionalPodAlarms: \(String(describing: optionalPodAlarms))",
             String(reflecting: podState),
             String(reflecting: rileyLinkConnectionManagerState),
             String(reflecting: messageLog),
