@@ -251,6 +251,8 @@
 		7D4C90DB2331DFF2003F5248 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C90D92331DFF2003F5248 /* Localizable.strings */; };
 		7D4C90DE2331DFF2003F5248 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C90DC2331DFF2003F5248 /* Localizable.strings */; };
 		7D4C915923333FF0003F5248 /* OmnipodPumpManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C915B23333FF0003F5248 /* OmnipodPumpManager.storyboard */; };
+		7D4C916323336128003F5248 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2366EF212527DA0028B67D /* LocalizedString.swift */; };
+		7D4C916423336133003F5248 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2366EF212527DA0028B67D /* LocalizedString.swift */; };
 		7D70766D1FE092D4004AC8EA /* LoopKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D70766F1FE092D4004AC8EA /* LoopKit.strings */; };
 		7D7076771FE092D6004AC8EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D7076791FE092D6004AC8EA /* InfoPlist.strings */; };
 		7D70767C1FE092D6004AC8EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D70767E1FE092D6004AC8EA /* InfoPlist.strings */; };
@@ -3988,6 +3990,7 @@
 			files = (
 				C136AA442311704A008A320D /* OSLog.swift in Sources */,
 				C136AA4223116E7B008A320D /* OmniKitPlugin.swift in Sources */,
+				7D4C916323336128003F5248 /* LocalizedString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3997,6 +4000,7 @@
 			files = (
 				C136AA732311899D008A320D /* OSLog.swift in Sources */,
 				C136AA6723118817008A320D /* MinimedKitPlugin.swift in Sources */,
+				7D4C916423336133003F5248 /* LocalizedString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
