@@ -1,2 +1,2 @@
-github "LoopKit/LoopKit" "dev"
+github "kdisimone/LoopKit" "test-translations"
 github "LoopKit/MKRingProgressView" "appex-safe"
