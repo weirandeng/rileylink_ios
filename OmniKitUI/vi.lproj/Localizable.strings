@@ -42,7 +42,7 @@
 "Basal Delivery" = "Liều tiêm basal";
 
 /* The title text for the basal rate schedule */
-"Basal Rates" = "Basal Rates";
+"Basal Rates" = "Lịch biểu tiêm liều nền";
 
 /* The title of the cell showing pod bolus status */
 "Bolus Delivery" = "Liều tiêm bolus";
