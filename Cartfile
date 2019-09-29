@@ -1,2 +1,3 @@
-github "kdisimone/LoopKit" "jojo"
+#github "kdisimone/LoopKit" "jojo"
+githbu "weirandeng/LoopKit" "jojo"
 github "maxkonovalov/MKRingProgressView" ~> 2.2
